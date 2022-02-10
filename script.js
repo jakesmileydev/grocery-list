@@ -1,7 +1,6 @@
 "use strict";
 
 const list = [];
-let listCount = 0;
 
 const inputEl = document.querySelector(".list-input");
 const listEl = document.querySelector(".list");
@@ -14,23 +13,29 @@ const checkBTN = document.querySelector(".check-btn");
 addBTN.addEventListener("click", function (e) {
   e.preventDefault();
   if (inputEl.value) {
-    listCount++;
-    const listItem = document.createElement("div");
-    listItem.classList.add("item");
-    listItem.classList.add(`item--${listCount}`);
     const HTML = `
-    <div class="item-name">${inputEl.value}</div>
-    <div class="btns">
-      <button class="check-btn">✅</button>
-      <button class="delete-btn delete-btn--${listCount}">❌</button>
-    </div>
+    <li class="list-item">
+          <div class="checkbox"></div>
+
+          <div class="item-name">${input.value}</div>
+
+          <button class="btn btn--edit">
+            <ion-icon class="item-icon" name="create-outline"></ion-icon>
+          </button>
+
+          <button class="btn btn--delete">
+            <ion-icon class="item-icon" name="close-circle-outline"></ion-icon>
+          </button>
+        </li>
       `;
-    listItem.innerHTML = HTML;
-    listEl.append(listItem);
-    deleteBTNS.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        console.log("ok");
-      });
-    });
+
+    inputEl.value = "";
+    listEl.insertAdjacentHTML("beforeend", HTML);
+  }
+});
+
+listEl.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-btn")) {
+    e.target.parentElement.remove();
   }
 });

@@ -4,18 +4,70 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- style sheets -->
     <link rel="stylesheet" href="style.css" />
-    <title>Grocery List</title>
+    <title>ToDo List</title>
   </head>
   <body>
     <main class="list-container">
-      <h1>Grocery List</h1>
-      <form class="add-item">
+      <header>
+        <h1>ToDo List</h1>
+      </header>
+
+      <ul class="list">
+        <li class="list-item">
+          <div class="checkbox"></div>
+
+          <div class="item-name">Milk</div>
+
+          <button class="btn btn--edit">
+            <ion-icon class="item-icon" name="create-outline"></ion-icon>
+          </button>
+
+          <button class="btn btn--delete">
+            <ion-icon class="item-icon" name="close-circle-outline"></ion-icon>
+          </button>
+        </li>
+      </ul>
+
+      <section class="add-item">
         <input class="list-input" type="text" placeholder="Eggs" />
         <button class="add-btn">Add Item</button>
-      </form>
-      <div class="list"></div>
+      </section>
     </main>
+
+    <footer>
+      <div class="footer-btns">
+        <button class="btn--lists">
+          <ion-icon class="footer-icon" name="list-outline"></ion-icon>
+        </button>
+        <button class="btn--add">
+          <ion-icon class="footer-icon" name="add-outline"></ion-icon>
+        </button>
+        <button class="btn--color">
+          <ion-icon class="footer-icon" name="color-palette-outline"></ion-icon>
+        </button>
+      </div>
+    </footer>
+
+    <!-- Ion Icons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!-- ----- -->
+
     <script defer src="script.js"></script>
   </body>
 </html>
