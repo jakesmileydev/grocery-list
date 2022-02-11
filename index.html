@@ -16,45 +16,46 @@
     <title>ToDo List</title>
   </head>
   <body>
-    <main class="list-container">
+    <main class="container">
       <header>
-        <h1>ToDo List</h1>
+        <h1>
+          <span class="highlight">ToDo</span> more than ever.<br />
+          Get <span class="highlight">Listy</span>.
+        </h1>
       </header>
-
-      <ul class="list">
-        <li class="list-item">
-          <div class="checkbox"></div>
-
-          <div class="item-name">Milk</div>
-
-          <button class="btn btn--edit">
-            <ion-icon class="item-icon" name="create-outline"></ion-icon>
-          </button>
-
-          <button class="btn btn--delete">
-            <ion-icon class="item-icon" name="close-circle-outline"></ion-icon>
-          </button>
-        </li>
-      </ul>
-
-      <section class="add-item">
-        <input class="list-input" type="text" placeholder="Eggs" />
-        <button class="add-btn">Add Item</button>
-      </section>
+      <h2 class="list-name">My List</h2>
+      <ul class="list"></ul>
     </main>
 
     <footer>
-      <div class="footer-btns">
-        <button class="btn--lists">
-          <ion-icon class="footer-icon" name="list-outline"></ion-icon>
-        </button>
-        <button class="btn--add">
-          <ion-icon class="footer-icon" name="add-outline"></ion-icon>
-        </button>
-        <button class="btn--color">
-          <ion-icon class="footer-icon" name="color-palette-outline"></ion-icon>
-        </button>
+      <div class="new-task">
+        <form class="input-container--new-task">
+          <input
+            class="input--new-task"
+            type="text"
+            placeholder="Create a new task..."
+          />
+          <button class="btn--new-task">
+            <ion-icon class="icon--new-task" name="add-outline"></ion-icon>
+          </button>
+        </form>
       </div>
+      <nav class="footer-nav">
+        <div class="footer-btns">
+          <button class="footer-btn btn--clear">
+            <ion-icon class="footer-icon" name="refresh-outline"></ion-icon>
+          </button>
+          <button class="footer-btn btn--lists">
+            <ion-icon class="footer-icon" name="list-outline"></ion-icon>
+          </button>
+          <button class="footer-btn btn--color">
+            <ion-icon
+              class="footer-icon"
+              name="color-palette-outline"
+            ></ion-icon>
+          </button>
+        </div>
+      </nav>
     </footer>
 
     <!-- Ion Icons -->
@@ -66,7 +67,7 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-    <!-- ----- -->
+    <!--  -----  -->
 
     <script defer src="script.js"></script>
   </body>
