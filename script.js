@@ -36,14 +36,8 @@ const updateListDisplay = function () {
           <ion-icon class="check ${complete}" name="checkmark-outline"></ion-icon></div>
         </div>
       <div class="item-name ${complete}">${item.name}</div>
-    
-      <button class="btn btn--edit ${complete}">
-        <ion-icon class="icon--edit" name="create-outline"></ion-icon>
-      </button>
-    
-      <button class="btn btn--delete ${complete}">
-        <ion-icon class="icon--delete" name="close-outline"></ion-icon>
-      </button>
+      <button class="btn btn--edit ${complete}">Edit</button>
+      <button class="btn btn--delete ${complete}">Delete</button>
     </li>
     `;
 
@@ -52,10 +46,9 @@ const updateListDisplay = function () {
 };
 
 listEl.addEventListener("click", function (e) {
-  // console.log(e.target.closest(".item-name") || e.target.closest(".checkbox"));
-
   handleDelete(e);
   handleEdit(e);
+  handleDoneEditing(e);
   handleCheckOff(e);
 });
 
@@ -65,10 +58,7 @@ clearBtn.addEventListener("click", function () {
 });
 
 const handleDelete = function (e) {
-  if (
-    e.target.classList.contains("icon--delete") ||
-    e.target.classList.contains("btn--delete")
-  ) {
+  if (e.target.classList.contains("btn--delete")) {
     // Remove list item object
     list.splice(
       list.indexOf(
@@ -84,32 +74,51 @@ const handleDelete = function (e) {
   }
 };
 
+const handleDoneEditing = function (e) {
+  if (e.target.classList.contains("btn--done")) {
+    const thisItem = e.target.closest(".list-item");
+    const thisObject = list.find(
+      (listItem) =>
+        listItem.name === e.target.closest(".list-item").dataset.name
+    );
+    const buttonHTML = `<button class="btn btn--edit">Edit</button>`;
+
+    thisItem.querySelector(".item-name").textContent =
+      thisItem.dataset.name =
+      thisObject.name =
+        thisItem.querySelector(".input--edit-task").value;
+    thisItem.querySelector(".btn--done").remove();
+    thisItem
+      .querySelector(".btn--delete")
+      .insertAdjacentHTML("beforebegin", buttonHTML);
+    thisItem.querySelector(".item-name").classList.remove("editing");
+
+    console.log(list);
+  }
+};
+
 const handleEdit = function (e) {
-  if (
-    e.target.classList.contains("icon--edit") ||
-    e.target.classList.contains("btn--edit")
-  ) {
-    e.target.closest(".list-item").querySelector(".item-name").textContent = "";
-    const HTML = `
-    <input class="input input--edit-task" type="text" />
-    <button class="btn--edit-task">
-        Done
-    </button>
-    `;
-    e.target
-      .closest(".list-item")
+  e.preventDefault();
+  const thisItem = e.target.closest(".list-item");
+  const thisObject = list.find(
+    (listItem) => listItem.name === thisItem.dataset.name
+  );
+
+  if (e.target.classList.contains("btn--edit")) {
+    thisItem.querySelector(".item-name").textContent = "";
+
+    const inputHTML = `<input class="input input--edit-task" type="text" />`;
+    const buttonHTML = `<button class="btn btn--done">Done</button>`;
+    thisItem
       .querySelector(".item-name")
-      .insertAdjacentHTML("afterbegin", HTML);
-    e.target
-      .closest(".list-item")
-      .querySelector(".btn--edit")
-      .classList.add("editing");
-    e.target
-      .closest(".list-item")
-      .querySelector(".item-name")
-      .classList.add("editing");
-    e.target.closest(".list-item").querySelector(".input--edit-task").value =
-      e.target.closest(".list-item").dataset.name;
+      .insertAdjacentHTML("afterbegin", inputHTML);
+    thisItem.querySelector(".btn--edit").remove();
+    thisItem.querySelector(".item-name").classList.add("editing");
+    thisItem
+      .querySelector(".btn--delete")
+      .insertAdjacentHTML("beforebegin", buttonHTML);
+    thisItem.querySelector(".input--edit-task").value = thisItem.dataset.name;
+    thisItem.querySelector(".input--edit-task").focus();
   }
 };
 
@@ -120,15 +129,14 @@ const handleCheckOff = function (e) {
     e.target.classList.contains("check") ||
     e.target.classList.contains("checkbox-container")
   ) {
-    const currentItem = e.target.closest(".list-item");
-    const currentObject = list.find(
-      (listItem) => listItem.name === currentItem.dataset.name
+    const thisItem = e.target.closest(".list-item");
+    const thisObject = list.find(
+      (listItem) => listItem.name === thisItem.dataset.name
     );
-    currentObject.isChecked = !currentObject.isChecked;
-    toggleComplete([
-      ...currentItem.children,
-      currentItem.querySelector(".check"),
-    ]);
+
+    thisObject.isChecked = !thisObject.isChecked;
+
+    toggleComplete([...thisItem.children, thisItem.querySelector(".check")]);
   }
 };
 
