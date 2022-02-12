@@ -52,6 +52,9 @@ button {
 .container {
   padding: 1rem;
 }
+.list-item:hover {
+  transform: translateY(-2px);
+}
 .highlight {
   position: relative;
 }
@@ -93,8 +96,10 @@ button {
   grid-template-columns: 1fr 14fr 2fr 2fr;
 
   align-items: center;
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
+
+  transition: all 0.1s ease-in-out;
 }
 
 .item-name {

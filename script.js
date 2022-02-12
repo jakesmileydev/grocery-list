@@ -99,12 +99,12 @@ const handleDoneEditing = function (e) {
 
 const handleEdit = function (e) {
   e.preventDefault();
-  const thisItem = e.target.closest(".list-item");
-  const thisObject = list.find(
-    (listItem) => listItem.name === thisItem.dataset.name
-  );
 
   if (e.target.classList.contains("btn--edit")) {
+    const thisItem = e.target.closest(".list-item");
+    const thisObject = list.find(
+      (listItem) => listItem.name === thisItem.dataset.name
+    );
     thisItem.querySelector(".item-name").textContent = "";
 
     const inputHTML = `<input class="input input--edit-task" type="text" />`;
