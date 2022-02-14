@@ -3,9 +3,9 @@
 const list = [
   { name: "Practice guitar", isChecked: false },
   { name: "Buy groceries", isChecked: false },
-  { name: "Exercise", isChecked: false },
   { name: "Hire Jake Smiley", isChecked: true },
-  { name: "Dinner with in-laws", isChecked: false },
+  { name: "Exercise", isChecked: false },
+  { name: "Dinner with Bob and Alice", isChecked: false },
 ];
 
 const inputEl = document.querySelector(".input--new-task");
@@ -13,6 +13,13 @@ const listEl = document.querySelector(".list");
 const newTaskBtn = document.querySelector(".btn--new-task");
 const deleteBtn = document.querySelector(".btn--delete");
 const clearBtn = document.querySelector(".btn--clear");
+
+listEl.addEventListener("click", function (e) {
+  handleDelete(e);
+  handleEdit(e);
+  handleDoneEditing(e);
+  handleCheckOff(e);
+});
 
 newTaskBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -24,6 +31,46 @@ newTaskBtn.addEventListener("click", function (e) {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }
 });
+//Hover effect for checkboxes;
+clearBtn.addEventListener("click", function () {
+  list.length = 0;
+  updateListDisplay();
+});
+
+listEl.addEventListener("mouseout", (e) => handleTaskHover(e));
+listEl.addEventListener("mouseover", (e) => handleTaskHover(e));
+
+const handleTaskHover = function (e) {
+  if (!e.target.closest(".list-item")) return;
+
+  const thisObject = list.find(
+    (listItem) => listItem.name === e.target.closest(".list-item").dataset.name
+  );
+
+  if (e.target.classList.contains("checkbox")) return;
+  if (!e.relatedTarget) return;
+  if (
+    e.target.classList.contains("item-name") &&
+    e.relatedTarget.classList.contains("checkbox-container")
+  )
+    return;
+  if (
+    e.target.classList.contains("checkbox-container") &&
+    e.relatedTarget.classList.contains("item-name")
+  )
+    return;
+  if (
+    e.target.classList.contains("item-name") ||
+    e.target.classList.contains("checkbox-container")
+  ) {
+    if (e.relatedTarget.classList.contains("checkbox")) return;
+
+    e.target
+      .closest(".list-item")
+      .querySelector(".item-name")
+      .classList.toggle("item-name--hover");
+  }
+};
 
 const updateListDisplay = function () {
   listEl.innerHTML = "";
@@ -44,18 +91,6 @@ const updateListDisplay = function () {
     listEl.insertAdjacentHTML("beforeend", HTML);
   });
 };
-
-listEl.addEventListener("click", function (e) {
-  handleDelete(e);
-  handleEdit(e);
-  handleDoneEditing(e);
-  handleCheckOff(e);
-});
-
-clearBtn.addEventListener("click", function () {
-  list.length = 0;
-  updateListDisplay();
-});
 
 const handleDelete = function (e) {
   if (e.target.classList.contains("btn--delete")) {
@@ -105,10 +140,10 @@ const handleEdit = function (e) {
     const thisObject = list.find(
       (listItem) => listItem.name === thisItem.dataset.name
     );
-    thisItem.querySelector(".item-name").textContent = "";
-
     const inputHTML = `<input class="input input--edit-task" type="text" />`;
     const buttonHTML = `<button class="btn btn--done">Done</button>`;
+
+    thisItem.querySelector(".item-name").textContent = "";
     thisItem
       .querySelector(".item-name")
       .insertAdjacentHTML("afterbegin", inputHTML);
@@ -136,7 +171,11 @@ const handleCheckOff = function (e) {
 
     thisObject.isChecked = !thisObject.isChecked;
 
-    toggleComplete([...thisItem.children, thisItem.querySelector(".check")]);
+    toggleComplete([
+      ...thisItem.children,
+      thisItem.querySelector(".checkbox"),
+      thisItem.querySelector(".check"),
+    ]);
   }
 };
 

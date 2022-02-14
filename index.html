@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400&display=swap"
       rel="stylesheet"
     />
     <!-- style sheets -->
@@ -16,46 +16,16 @@
     <title>ToDo List</title>
   </head>
   <body>
+    <header>
+      <h1>
+        <span class="highlight">ToDo</span> more than ever.<br />
+        Get <span class="highlight">Listy</span>.
+      </h1>
+    </header>
+
     <main class="container">
-      <header>
-        <h1>
-          <span class="highlight">ToDo</span> more than ever.<br />
-          Get <span class="highlight">Listy</span>.
-        </h1>
-      </header>
       <h2 class="list-name">My List</h2>
-      <ul class="list">
-        <li data-name="Style completed list element" class="list-item">
-          <div class="checkbox-container">
-            <div class="checkbox">
-              <ion-icon class="check" name="checkmark-outline"></ion-icon>
-            </div>
-          </div>
-          <div class="item-name">
-            <input class="input input--edit-task" type="text" />
-          </div>
-
-          <button class="btn btn--edit">Edit</button>
-
-          <button class="btn btn--delete">Delete</button>
-        </li>
-        <li data-name="Style completed list element" class="list-item">
-          <div class="checkbox-container">
-            <div class="checkbox">
-              <ion-icon class="check" name="checkmark-outline"></ion-icon>
-            </div>
-          </div>
-          <div class="item-name editing">Hello Freak Bitches</div>
-
-          <button class="btn btn--edit">
-            <ion-icon class="icon--edit" name="create-outline"></ion-icon>
-          </button>
-
-          <button class="btn btn--delete">
-            <ion-icon class="icon--delete" name="close-outline"></ion-icon>
-          </button>
-        </li>
-      </ul>
+      <ul class="list"></ul>
     </main>
 
     <footer>
